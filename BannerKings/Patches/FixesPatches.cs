@@ -678,6 +678,20 @@ namespace BannerKings.Patches
 
                 return false;
             }
+            
+            [HarmonyPatch(typeof(MobileParty))]
+            public class MobileParty_TargetPartySetter_Patch
+            {
+                [HarmonyPatch("set_TargetParty")]
+                [HarmonyPrefix]
+                public static void Prefix(MobileParty __instance, MobileParty value)
+                {
+                    if (__instance.DefaultBehavior == AiBehavior.EscortParty && value == null)
+                    {
+                        __instance.Ai.SetDoNothing(); // Prevent invalid escort state
+                    }
+                }
+            }
         }
     }
 }
