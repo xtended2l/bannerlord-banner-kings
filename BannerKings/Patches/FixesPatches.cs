@@ -688,7 +688,7 @@ namespace BannerKings.Patches
                 {
                     if (__instance.DefaultBehavior == AiBehavior.EscortParty && value == null)
                     {
-                        __instance.Ai.SetDoNothing(); // Prevent invalid escort state
+                        __instance.Ai.SetMoveModeHold(); // Safely idle party
                     }
                 }
             }
